@@ -92,4 +92,25 @@ public class ImageUtil {
                 .watermark(Positions.BOTTOM_RIGHT, ImageIO.read(new File(basePath + "/jingyu.png")), 0.25f)
                 .outputQuality(0.8f).toFile("/Users/mac/Downloads/luotonew.png");
     }
+
+    /**
+     * storePath是文件路径或者目录路径
+     * 文件路径删除文件
+     * 目录路径删除目录下所有文件
+     *
+     * @param storePath
+     */
+    public static void deleteFileOrPath(String storePath){
+        File fileOrPath = new File(PathUtil.getImgBasePath()+storePath);
+
+        if(fileOrPath.exists()){
+            if(fileOrPath.isDirectory()){
+                File files[] = fileOrPath.listFiles();
+                for (File file: files) {
+                    file.delete();
+                }
+            }
+            fileOrPath.delete();
+        }
+    }
 }

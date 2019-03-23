@@ -9,7 +9,6 @@ $(function(){
     var registerUrl = '/o2o/shopadmin/registershop';
 
     //在js加载时就调用方法获取后台
-    alert(initUrl);
     getShopInitInfo();
 
     function getShopInitInfo(){
@@ -36,7 +35,7 @@ $(function(){
             shop.shopName = $('#shop-name').val();
             shop.shopAddr = $('#shop-addr').val();
             shop.phone = $('#shop-phone').val();
-            shop.shopDesc = $("#shop-desc").val();
+            shop.shopDesc = $('#shop-desc').val();
 
             // 选择id,双重否定=肯定
             shop.shopCategory = {
@@ -71,7 +70,7 @@ $(function(){
 
 
             $.ajax({
-                url:isEdit ? modifyShopUrl:registerShopUrl,
+                url:registerUrl,
                 type : 'POST',
                 data : formData,
                 contentType : false,

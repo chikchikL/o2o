@@ -73,7 +73,6 @@ public class ShopManagementController {
         //1.接收并转化相应的参数，包括店铺信息以及图片信息
 
 
-
         Map<String,Object> modelMap = new HashMap<>();
         //判断验证码
         if(!CodeUtil.checkVerifyCode(request)){

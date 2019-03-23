@@ -10,7 +10,7 @@ public enum ShopStateEnum {
     private String stateInfo;
 
     //构造器私有是默认的
-    private ShopStateEnum(int state, String stateInfo) {
+    ShopStateEnum(int state, String stateInfo) {
         this.state = state;
         this.stateInfo = stateInfo;
     }

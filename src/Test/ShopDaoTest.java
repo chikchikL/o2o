@@ -18,6 +18,14 @@ public class ShopDaoTest extends BaseTest {
     private ShopDao shopDao;
 
     @Test
+    public void testQueryShop(){
+
+        Shop shop = shopDao.queryByShopId(1L);
+        System.out.println(shop.getArea().getAreaName());
+
+    }
+
+    @Test
     @Ignore//使得junit忽略这个方法的测试
     public void testInsertShop(){
         Shop shop = new Shop();
