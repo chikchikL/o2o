@@ -6,12 +6,26 @@ public class test {
     
     public static void main(String[] args){
 
-        String[] strings = {"321", "3", "32","322","2"};
-        List<String> strList = Arrays.asList(strings);
+        TreeSet<Integer> integers = new TreeSet<>();
+        integers.add(2);
+        integers.add(2);
+        integers.add(3);
+        integers.add(14);
+        integers.add(1231);
+        integers.add(55);
+        integers.add(52);
+        integers.add(11);
 
-        Collections.sort(strList, (o1, o2) -> (o1+o2).compareTo(o2+o1));
+        ArrayList<Object> objects = new ArrayList<>();
+        objects.add(13);
+        objects.add("你好");
 
-        System.out.println(strList);
+        System.out.println(objects.get(1));
+
+
+        System.out.println(integers);
+
+
     }
 
 

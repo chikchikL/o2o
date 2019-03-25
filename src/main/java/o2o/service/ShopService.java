@@ -22,4 +22,12 @@ public interface ShopService {
 
     ShopExecution modifyShop(Shop shop,InputStream shopImgInputStream,String fileName)
             throws ShopOperationException;
+
+    /**
+     * 根据id查询店铺详情
+     *
+     * @param shopId
+     * @return
+     */
+    Shop getByShopId(long shopId);
 }
