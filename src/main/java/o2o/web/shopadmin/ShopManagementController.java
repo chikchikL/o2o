@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.util.ArrayList;
@@ -258,6 +259,63 @@ public class ShopManagementController {
 
 
     }
+
+    @RequestMapping(value = "/getshopmanagementinfo",method = RequestMethod.GET)
+    @ResponseBody
+    private Map<String,Object> getShopManagementInfo(HttpServletRequest request){
+        HashMap<String, Object> modelMap = new HashMap<>();
+        //如session中有这个Attribute代表有访问该shop的权限
+        long shopId = HttpServletRequestUtil.getLong(request, "shopId");
+        if(shopId<=0){
+            Object currentShop = request.getSession().getAttribute("currentShop");
+            if(currentShop == null){
+                modelMap.put("redirect",true);
+                modelMap.put("url","/o2o/shop/shoplist");
+            }else{
+                Shop current = (Shop)currentShop;
+                modelMap.put("redirect",false);
+                modelMap.put("shopId",current.getShopId());
+            }
+        }else{
+            Shop currentShop = new Shop();
+            currentShop.setShopId(shopId);
+            request.getSession().setAttribute("currentShop",currentShop);
+            modelMap.put("redirect",false);
+
+        }
+
+        return modelMap;
+    }
+
+    @RequestMapping(value = "/getshoplist",method = RequestMethod.GET)
+    @ResponseBody
+    private Map<String,Object> getShopList(HttpServletRequest request){
+        HashMap<String, Object> modelMap = new HashMap<>();
+        PersonInfo user = new PersonInfo();
+        request.getSession().setAttribute("user",user);
+        user = (PersonInfo) request.getSession().getAttribute("user");
+
+        //todo:登录
+        user.setUserId(1L);
+        Long userId = user.getUserId();
+        List<Shop> shopList = null;
+        try{
+            Shop shopCondition = new Shop();
+            shopCondition.setOwner(user);
+            ShopExecution se = shopService.getShopList(shopCondition, 0, 100);
+
+            modelMap.put("shopList",se.getShopList());
+            modelMap.put("user",user);
+            modelMap.put("success",true);
+
+        }catch (Exception e){
+            modelMap.put("success",false);
+            modelMap.put("errMsg",e.getMessage());
+        }
+
+        return modelMap;
+    }
+
 //    private static void inputStreamToFile(InputStream ins, File file){
 //        FileOutputStream fos = null;
 //        try {

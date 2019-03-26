@@ -61,4 +61,15 @@ public class ShopServiceTest extends BaseTest{
 
     }
 
+    @Test
+    public void testGetShopList(){
+        Shop shopCondition = new Shop();
+        PersonInfo owner = new PersonInfo();
+        owner.setUserId(1L);
+        shopCondition.setOwner(owner);
+
+        ShopExecution shopList = shopService.getShopList(shopCondition, 0, 2);
+        System.out.println(shopList);
+    }
+
 }

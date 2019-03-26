@@ -30,4 +30,13 @@ public interface ShopService {
      * @return
      */
     Shop getByShopId(long shopId);
+
+    /**
+     * 分页查找店铺列表
+     * @param shopCondition
+     * @param pageIndex
+     * @param pageSize
+     * @return
+     */
+    public ShopExecution getShopList(Shop shopCondition,int pageIndex,int pageSize);
 }
