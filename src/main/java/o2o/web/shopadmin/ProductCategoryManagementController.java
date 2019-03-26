@@ -9,10 +9,7 @@ import o2o.exceptions.ProductCategoryOperationException;
 import o2o.service.ProductCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -83,4 +80,31 @@ public class ProductCategoryManagementController {
         return modelMap;
     }
 
+
+    @RequestMapping(value = "/removeproductcategory",method = RequestMethod.POST)
+    @ResponseBody
+    private Map<String,Object> removeProductCategory(@RequestParam Long productCategoryId, HttpServletRequest request){
+        HashMap<String, Object> modelMap = new HashMap<>();
+        if(productCategoryId !=null && productCategoryId > 0){
+            try{
+                Shop currentShop = (Shop) request.getSession().getAttribute("currentShop");
+                ProductCategoryExecution pe = productCategoryService.deleteProductCategory(productCategoryId, currentShop.getShopId());
+                if(pe.getState() == ProductCategoryStateEnum.SUCCESS.getState()){
+                    modelMap.put("success",true);
+                }else{
+                    modelMap.put("success",false);
+                    modelMap.put("errMsg",pe.getStateInfo());
+                }
+            }catch (RuntimeException e){
+                modelMap.put("success",false);
+                modelMap.put("errMsg",e.toString());
+                return modelMap;
+            }
+        }else{
+            modelMap.put("success",false);
+            modelMap.put("errMsg","请至少选择一个商品类别");
+        }
+
+        return modelMap;
+    }
 }

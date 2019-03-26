@@ -15,4 +15,13 @@ public interface ProductCategoryService {
 
     ProductCategoryExecution batchAddProductCategory(List<ProductCategory> list)
             throws ProductCategoryOperationException;
+
+    /**
+     * 将此类别下的商品里的类别id置为空，再删除掉该商品类别，因为类别id是Product表的外键
+     * @param productCategoryId
+     * @param shopId
+     * @return
+     */
+    ProductCategoryExecution deleteProductCategory(long productCategoryId,long shopId)
+            throws ProductCategoryOperationException;
 }

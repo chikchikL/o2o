@@ -9,6 +9,7 @@ import o2o.service.ProductCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 @Service
@@ -46,5 +47,23 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
         }else{
             return new ProductCategoryExecution(ProductCategoryStateEnum.EMPTY_LIST);
         }
+    }
+
+    @Override
+    @Transactional
+    public ProductCategoryExecution deleteProductCategory(@RequestParam long productCategoryId, long shopId)
+            throws ProductCategoryOperationException{
+        //TODO 将此商品类别下的商品类别Id置为空后再删除，应该是因为外键约束
+        try{
+            int effectedNum = dao.deleteProductCategory(productCategoryId,shopId);
+            if(effectedNum <= 0){
+                throw new ProductCategoryOperationException("商品类别删除失败");
+            }else{
+                return new ProductCategoryExecution(ProductCategoryStateEnum.SUCCESS);
+            }
+        }catch (ProductCategoryOperationException e){
+            throw new ProductCategoryOperationException("delete product category error:"+e.getMessage());
+        }
+
     }
 }
