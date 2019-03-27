@@ -113,4 +113,32 @@ public class ImageUtil {
             fileOrPath.delete();
         }
     }
+
+    public static String generateNormalImg(InputStream is,String fileName, String targetAddr) {
+        //生成随机文件名
+        String realFileName = getRandomFileName();
+        //获取文件扩展名
+        String extension = getFileExtension(fileName);
+
+        //将C:/projectdev/image/与相对路径拼接
+        makeDirPath(targetAddr);
+
+        //相对路径+随机文件名+扩展名构成全新的相对路径
+        String relativeAddr  =targetAddr +realFileName + extension;
+
+        //imgBasePath指定为C:/projectdev/image/
+        File dest = new File(PathUtil.getImgBasePath() + relativeAddr);
+
+        //将resources下的水印图片加到thumbnail指定的图片上，再将该图片压缩为指定质量放到dest指定的路径上
+        try {
+
+            Thumbnails.of(is).size(337, 640)
+                    .watermark(Positions.BOTTOM_RIGHT,ImageIO.read(new File(basePath + "\\watermark.png")),0.25f)
+                    .outputQuality(0.9f).toFile(dest);
+        }catch (IOException e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+        return relativeAddr;
+    }
 }
