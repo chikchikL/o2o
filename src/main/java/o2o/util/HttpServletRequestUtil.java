@@ -38,4 +38,20 @@ public class HttpServletRequestUtil
             return null;
         }
     }
+
+    public static Double getDouble(HttpServletRequest request, String key) {
+        try {
+            return Double.valueOf(request.getParameter(key));
+        } catch (Exception e) {
+            return -1d;
+        }
+    }
+
+    public static Boolean getBoolean(HttpServletRequest request, String key) {
+        try {
+            return Boolean.valueOf(request.getParameter(key));
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

@@ -48,12 +48,19 @@ public class ProductImgDaoTest extends BaseTest {
 	}
 
 	@Test
-	@Ignore
 	public void testDeleteProductImgByProductId() throws Exception {
 		// 删除商品详情记录
-		Long productId = 1L;
+		Long productId = 7L;
 		int effectNum = productImgDao.deleteProductImgByProductId(productId);
 		System.out.println("effectNum:" + effectNum);
+	}
+
+	@Test
+	public void testQueryProductImgList(){
+		List<ProductImg> productImgs = productImgDao.selectProductImgListByProductId(4L);
+		System.out.println(productImgs);
+
+
 	}
 
 }

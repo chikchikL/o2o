@@ -7,7 +7,7 @@ import o2o.enums.ShopStateEnum;
 import o2o.exceptions.ShopOperationException;
 import o2o.service.ShopService;
 import o2o.util.ImageUtil;
-import o2o.util.PageCaculator;
+import o2o.util.PageCalculator;
 import o2o.util.PathUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,7 +32,7 @@ public class ShopServiceImpl implements ShopService {
     @Override
     public ShopExecution getShopList(Shop shopCondition, int pageIndex, int pageSize) {
 
-        int rowIndex = PageCaculator.calculateRowIndex(pageIndex,pageSize);
+        int rowIndex = PageCalculator.calculateRowIndex(pageIndex,pageSize);
         List<Shop> shopList = shopDao.queryShopList(shopCondition,rowIndex,pageSize);
         int count = shopDao.queryShopCount(shopCondition);
         ShopExecution se = new ShopExecution();

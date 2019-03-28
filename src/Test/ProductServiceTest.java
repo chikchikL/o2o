@@ -68,14 +68,14 @@ public class ProductServiceTest extends BaseTest {
 	}
 
 	@Test
-	public void testModifyShop() throws IOException {
+	public void testModifyProduct() throws IOException {
 		Product product = new Product();
 		Shop shop = new Shop();
 		shop.setShopId(1L);
 		product.setShop(shop);
 		ProductCategory productCategory = new ProductCategory();
 		productCategory.setProductCategoryId(2L);
-		product.setProductId(3L);
+		product.setProductId(6L);
 		product.setProductCategory(productCategory);
 		product.setProductName("测试商品2");
 		product.setProductDesc("测试商品2描述");
@@ -83,8 +83,20 @@ public class ProductServiceTest extends BaseTest {
 		product.setEnableStatus(EnableStatusEnum.AVAILABLE.getState());
 		product.setLastEditTime(new Date());
 		product.setCreateTime(new Date());
-		String filePath0 = "D:\\eclipse\\pic\\1.JPG";
-		List<MultipartFile> productImgList = new ArrayList<>();
-		String filePath1 = "D:\\eclipse\\pic\\2.JPG";
+
+
+		File thumb = new File("C:\\Users\\刘洋\\Desktop\\test\\wo.jpg");
+		FileInputStream thumbfis = new FileInputStream(thumb);
+
+		File img = new File("C:\\Users\\刘洋\\Desktop\\test\\wo.jpg");
+		FileInputStream imgFis = new FileInputStream(img);
+
+		ArrayList<InputStream> iss = new ArrayList<>();
+		iss.add(imgFis);
+		ArrayList<String> names = new ArrayList<>();
+		names.add(img.getName());
+
+		productService.modifyProduct(product,thumbfis,thumb.getName(),iss,names);
+
 	}
 }

@@ -36,21 +36,21 @@ public class ProductDaoTest extends BaseTest{
         System.out.println("effectNum:" + effectNum);
     }
 
+
+
     @Test
-    @Ignore
     public void testQueryProductByProductId() throws Exception {
-        Long productId = 1L;
+        Long productId = 4L;
         Product product = productDao.selectProductByProductId(productId);
         System.out.println("productImgSize：" + product.getProductImgList().size());
     }
 
     @Test
-    @Ignore
     public void testUpdateProduct() throws Exception {
         Product product = new Product();
-        product.setProductId(1L);
+        product.setProductId(6L);
         ProductCategory productCategory = new ProductCategory();
-        productCategory.setProductCategoryId(1L);
+        productCategory.setProductCategoryId(2L);
         Shop shop = new Shop();
         shop.setShopId(1L);
         product.setShop(shop);
@@ -61,7 +61,6 @@ public class ProductDaoTest extends BaseTest{
     }
 
     @Test
-    @Ignore
     public void testQueryProductList() throws Exception {
         Product productCondition = new Product();
         // 分页查询
@@ -72,7 +71,7 @@ public class ProductDaoTest extends BaseTest{
         System.out.println("productCount:" + productCount);
 
         // 使用条件查询
-        productCondition.setProductName("秋");
+        productCondition.setProductName("肉");
         // 条件分页查询
         List<Product> conditionList = productDao.selectProductList(productCondition, 0, 5);
         System.out.println("conditionList.size:" + conditionList.size());
