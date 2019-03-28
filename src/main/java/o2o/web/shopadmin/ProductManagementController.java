@@ -229,11 +229,20 @@ public class ProductManagementController {
                 //从session中获取当前店铺id并赋值给product，减少对前端数据的依赖
                 Shop currentShop = (Shop) request.getSession().getAttribute("currentShop");
                 product.setShop(currentShop);
+                ProductExecution pe =null;
+                if(thumbnailFile !=null && productImgStreams != null){
+                     pe = productService.modifyProduct(product,
+                            thumbnailFile.getInputStream(),
+                            thumbnailFile.getOriginalFilename(),
+                            productImgStreams, productImgNames);
+                }else{
+//                  //仅将商品下架的逻辑
+                    pe = productService.modifyProduct(product,
+                            null,
+                            null,
+                            null, null);
+                }
 
-                ProductExecution pe = productService.modifyProduct(product,
-                        thumbnailFile.getInputStream(),
-                        thumbnailFile.getOriginalFilename(),
-                        productImgStreams, productImgNames);
                 if(pe.getState() == ProductStateEnum.SUCCESS.getState()){
                     modelMap.put("success",true);
                 }else{
