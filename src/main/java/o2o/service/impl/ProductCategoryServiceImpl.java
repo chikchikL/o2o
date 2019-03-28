@@ -1,6 +1,7 @@
 package o2o.service.impl;
 
 import o2o.dao.ProductCategoryDao;
+import o2o.dao.ProductDao;
 import o2o.dto.ProductCategoryExecution;
 import o2o.entity.ProductCategory;
 import o2o.enums.ProductCategoryStateEnum;
@@ -16,6 +17,9 @@ import java.util.List;
 public class ProductCategoryServiceImpl implements ProductCategoryService {
     @Autowired
     ProductCategoryDao dao;
+
+    @Autowired
+    ProductDao productDao;
 
     @Override
     public List<ProductCategory> getProductCategoryList(long shopId) {
@@ -53,7 +57,17 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     @Transactional
     public ProductCategoryExecution deleteProductCategory(@RequestParam long productCategoryId, long shopId)
             throws ProductCategoryOperationException{
-        //TODO 将此商品类别下的商品类别Id置为空后再删除，应该是因为外键约束
+        //将商品表中该商品类别的商品类别id置为null，因为该外键不存在了
+        //即解除商品与该商品类别的关联
+        try{
+            int effectedNum = productDao.updateProductCategoryToNull(productCategoryId);
+            if(effectedNum < 0){
+                throw new RuntimeException("商品类别更新失败");
+            }
+        }catch (Exception e){
+            throw new RuntimeException("deleteProductCategory error:" + e.getMessage());
+        }
+        //删除商品类别
         try{
             int effectedNum = dao.deleteProductCategory(productCategoryId,shopId);
             if(effectedNum <= 0){
