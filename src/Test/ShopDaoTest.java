@@ -66,9 +66,18 @@ public class ShopDaoTest extends BaseTest {
     @Test
     public void testQueryShopList(){
         Shop shopCondition = new Shop();
-        PersonInfo owner = new PersonInfo();
-        owner.setUserId(1L);
-        shopCondition.setOwner(owner);
+        ShopCategory childCategory = new ShopCategory();
+        ShopCategory parentCategory = new ShopCategory();
+        parentCategory.setShopCategoryId(3L);
+        childCategory.setShopCategoryId(6L);
+        childCategory.setParent(parentCategory);
+
+        shopCondition.setShopCategory(childCategory);
+
+
+//        PersonInfo owner = new PersonInfo();
+//        owner.setUserId(1L);
+//        shopCondition.setOwner(owner);
         List<Shop> shops = shopDao.queryShopList(shopCondition, 0, 5);
         System.out.println(shops);
 

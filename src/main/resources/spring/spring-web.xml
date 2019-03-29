@@ -69,8 +69,8 @@
             <!--<mvc:exclude-mapping path="/shop/ownerlogin" />-->
             <!--<mvc:exclude-mapping path="/shop/ownerlogincheck" />-->
             <!--<mvc:exclude-mapping path="/shop/register" />-->
-            <!--&lt;!&ndash; shoplist page &ndash;&gt;-->
-            <!--<mvc:exclude-mapping path="/shop/shoplist" />-->
+            <!--&lt;!&ndash; shoplist.css page &ndash;&gt;-->
+            <!--<mvc:exclude-mapping path="/shop/shoplist.css" />-->
             <!--<mvc:exclude-mapping path="/shop/logout" />-->
             <!--<mvc:exclude-mapping path="/shop/list" />-->
             <!--&lt;!&ndash; changepsw page &ndash;&gt;-->

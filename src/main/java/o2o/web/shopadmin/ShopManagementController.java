@@ -270,7 +270,7 @@ public class ShopManagementController {
             Object currentShop = request.getSession().getAttribute("currentShop");
             if(currentShop == null){
                 modelMap.put("redirect",true);
-                modelMap.put("url","/o2o/shop/shoplist");
+                modelMap.put("url","/o2o/shop/shoplist.css");
             }else{
                 Shop current = (Shop)currentShop;
                 modelMap.put("redirect",false);

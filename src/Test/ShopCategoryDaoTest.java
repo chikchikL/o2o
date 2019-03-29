@@ -26,6 +26,12 @@ public class ShopCategoryDaoTest extends BaseTest{
 
     }
 
+    @Test
+    public void testQueryShopCategory(){
+        List<ShopCategory> shopCategories = dao.queryShopCategory(null);
+        System.out.println(shopCategories);
+    }
+
 
 
 }
