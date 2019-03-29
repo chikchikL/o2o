@@ -108,7 +108,7 @@ $(function() {
     // 店铺详情页面
     $('.shop-list').on('click', '.card', function(e) {
         var shopId = e.currentTarget.dataset.shopId;
-        window.location.href = '/o2o/front/shopdetail?shopId=' + shopId;
+        window.location.href = '/o2o/frontend/shopdetail?shopId=' + shopId;
     });
 
     $('#shoplist-search-div').on(
