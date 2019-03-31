@@ -12,7 +12,7 @@ public class PathUtil {
             basePath = "C:/projectdev/image/";
 
         }else{
-            basePath = "/home/xiangzhe/image";
+            basePath = "/Users/work/image";
         }
 
         basePath = basePath.replace("/",seperator);
